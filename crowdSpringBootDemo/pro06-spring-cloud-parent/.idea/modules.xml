@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/pro06-spring-cloud-parent.iml" filepath="$PROJECT_DIR$/pro06-spring-cloud-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro07-spring-cloud-common/pro07-spring-cloud-common.iml" filepath="$PROJECT_DIR$/pro07-spring-cloud-common/pro07-spring-cloud-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro08-spring-cloud-provider/pro08-spring-cloud-provider.iml" filepath="$PROJECT_DIR$/pro08-spring-cloud-provider/pro08-spring-cloud-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro09-spring-cloud-consumer/pro09-spring-cloud-consumer.iml" filepath="$PROJECT_DIR$/pro09-spring-cloud-consumer/pro09-spring-cloud-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro09-spring-cloud-feign-consumer/pro09-spring-cloud-feign-consumer.iml" filepath="$PROJECT_DIR$/pro09-spring-cloud-feign-consumer/pro09-spring-cloud-feign-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro10-spring-cloud-eureka/pro10-spring-cloud-eureka.iml" filepath="$PROJECT_DIR$/pro10-spring-cloud-eureka/pro10-spring-cloud-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro11-spring-cloud-dashboard/pro11-spring-cloud-dashboard.iml" filepath="$PROJECT_DIR$/pro11-spring-cloud-dashboard/pro11-spring-cloud-dashboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pro12-spring-cloud-zuul/pro12-spring-cloud-zuul.iml" filepath="$PROJECT_DIR$/pro12-spring-cloud-zuul/pro12-spring-cloud-zuul.iml" />
+    </modules>
+  </component>
+</project>

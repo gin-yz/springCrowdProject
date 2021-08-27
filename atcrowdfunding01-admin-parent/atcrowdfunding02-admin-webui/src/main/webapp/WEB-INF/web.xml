@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <!-- needed for ContextLoaderListener -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring-persist-*.xml</param-value>
+    </context-param>
+
+    <!-- Bootstraps the root web application context before servlet initialization -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!-- 指定字符集 -->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <!-- 强制请求设置字符集 -->
+        <init-param>
+            <param-name>forceRequestEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <!-- 强制响应设置字符集 -->
+        <init-param>
+            <param-name>forceResponseEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+    <!-- 这个Filter执行的顺序要在所有其他Filter前面 -->
+    <!-- 原因如下： -->
+    <!-- request.setCharacterEncoding(encoding)必须在request.getParameter()前面 -->
+    <!-- response.setCharacterEncoding(encoding)必须在response.getWriter()前面 -->
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- The front controller of this Spring Web application, responsible for handling all application requests -->
+    <servlet>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-web-mvc.xml</param-value>
+        </init-param>
+        <!-- Servlet默认生命周期中，创建对象是在第一次接收到请求时 -->
+        <!-- 而DispatcherServlet创建对象后有大量的“框架初始化”工作，不适合在第一次请求时来做 -->
+        <!-- 设置load-on-startup就是为了让DispatcherServlet在Web应用启动时创建对象、初始化 -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- Map all requests to the DispatcherServlet for handling -->
+    <servlet-mapping>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <!-- url-pattern配置方式一：/表示拦截所有请求 -->
+        <!-- <url-pattern>/</url-pattern> -->
+
+        <!-- url-pattern配置方式二：配置请求扩展名 -->
+        <!-- 优点1：xxx.css、xxx.js、xxx.png等等静态资源完全不经过SpringMVC，不需要特殊处理 -->
+        <!-- 优点2：可以实现伪静态效果。表面上看起来是访问一个HTML文件这样的静态资源，但是实际上是经过Java代码运算的结果。 -->
+        <!-- 	伪静态作用1：给黑客入侵增加难度。 -->
+        <!-- 	伪静态作用2：有利于SEO优化（让百度、谷歌这样的搜索引擎更容易找到我们项目）。 -->
+        <!-- 缺点：不符合RESTFul风格 -->
+        <url-pattern>*.html</url-pattern>
+
+        <!-- 为什么要另外再配置json扩展名呢？ -->
+        <!-- 如果一个Ajax请求扩展名是html，但是实际服务器给浏览器返回的是json数据，二者就不匹配了，会出现406错误。 -->
+        <!-- 为了让Ajax请求能够顺利拿到JSON格式的响应数据，我们另外配置json扩展名 -->
+        <url-pattern>*.json</url-pattern>
+    </servlet-mapping>
+
+    <!-- Spring Security配置，注意，名字什么的都不要换 -->
+    <!-- 因为使用了两个ioc容器(ContextLoaderListener和DispatcherServlet)分别加载不同的bean，默认的初始化顺序是 -->
+    <!-- ContextLoaderListener、DelegatingFilterProxy、DispatcherServlet-->
+    <!-- 而自定义的拦截器bean的配置类是使用DispatcherServlet加载的，所以DelegatingFilterProxy找不到对应的配置类，tomcat会无法启动-->
+    <!-- 解决方法是改DelegatingFilterProxy的源🐎（重新建包）,修改doFilter方法以及initFilterBean方法,其实好像也没有什么卵用-->
+    <!-- 最终解决办法还是使用ContextLoaderListener扫描自定义的拦截器bean，也就是WebAppSecurityConfig-->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+<!--    <welcome-file-list>-->
+<!--        <welcome-file>admin-main.jsp</welcome-file>-->
+<!--    </welcome-file-list>-->
+
+</web-app>

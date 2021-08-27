@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/atcrowdfunding08-member-eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/atcrowdfunding09-member-entity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/atcrowdfunding10-member-mysql-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/atcrowdfunding11-member-redis-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/atcrowdfunding12-member-authentication-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/atcrowdfunding13-member-project-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/atcrowdfunding14-member-order-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/atcrowdfunding15-member-pay-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/atcrowdfunding16-member-zuul/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/atcrowdfunding17-member-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../atcrowdfunding07-member-parent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../crowdSpringBootDemo/pro02-spring-boot-read-yml/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../crowdSpringBootDemo/pro03-spring-boot-mybatis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../crowdSpringBootDemo/pro11-spring-boot-maven-project/src/main/java" charset="UTF-8" />
+  </component>
+</project>

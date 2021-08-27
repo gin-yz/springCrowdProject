@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="atcrowdfunding04-admin-entity" />
+        <module name="atcrowdfunding17-member-api" />
+        <module name="atcrowdfunding06-common-reverse" />
+        <module name="pro09-spring-cloud-consumer" />
+        <module name="pro12-spring-cloud-zuul" />
+        <module name="atcrowdfunding09-member-entity" />
+        <module name="atcrowdfunding05-common-util" />
+        <module name="pro11-spring-boot-maven-project" />
+        <module name="atcrowdfunding13-member-project-consumer" />
+        <module name="atcrowdfunding02-admin-webui" />
+        <module name="pro11-spring-cloud-dashboard" />
+        <module name="pro09-spring-cloud-feign-consumer" />
+        <module name="atcrowdfunding14-member-order-consumer" />
+        <module name="atcrowdfunding16-member-zuul" />
+        <module name="pro05-spring-security" />
+        <module name="atcrowdfunding08-member-eureka" />
+        <module name="pro08-spring-cloud-provider" />
+        <module name="atcrowdfunding10-member-mysql-provider" />
+        <module name="atcrowdfunding15-member-pay-consumer" />
+        <module name="atcrowdfunding12-member-authentication-consumer" />
+        <module name="pro03-spring-boot-mybatis" />
+        <module name="pro07-spring-cloud-common" />
+        <module name="atcrowdfunding11-member-redis-provider" />
+        <module name="pro10-spring-cloud-eureka" />
+        <module name="pro02-spring-boot-read-yml" />
+        <module name="atcrowdfunding03-admin-component" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="webapp" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="atcrowdfunding08-member-eureka" options="-parameters" />
+      <module name="atcrowdfunding09-member-entity" options="-parameters" />
+      <module name="atcrowdfunding10-member-mysql-provider" options="-parameters" />
+      <module name="atcrowdfunding11-member-redis-provider" options="-parameters" />
+      <module name="atcrowdfunding12-member-authentication-consumer" options="-parameters" />
+      <module name="atcrowdfunding13-member-project-consumer" options="-parameters" />
+      <module name="atcrowdfunding14-member-order-consumer" options="-parameters" />
+      <module name="atcrowdfunding15-member-pay-consumer" options="-parameters" />
+      <module name="atcrowdfunding16-member-zuul" options="-parameters" />
+      <module name="atcrowdfunding17-member-api" options="-parameters" />
+      <module name="pro02-spring-boot-read-yml" options="-parameters" />
+      <module name="pro03-spring-boot-mybatis" options="-parameters" />
+      <module name="pro11-spring-boot-maven-project" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.crowd.mapper.OrderProjectDao">
+
+    <resultMap type="com.atguigu.crowd.entity.po.OrderProjectPO" id="OrderProjectMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="projectName" column="project_name" jdbcType="VARCHAR"/>
+        <result property="launchName" column="launch_name" jdbcType="VARCHAR"/>
+        <result property="returnContent" column="return_content" jdbcType="VARCHAR"/>
+        <result property="returnCount" column="return_count" jdbcType="INTEGER"/>
+        <result property="supportPrice" column="support_price" jdbcType="INTEGER"/>
+        <result property="freight" column="freight" jdbcType="INTEGER"/>
+        <result property="orderId" column="order_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="selectOrderProjectVO" resultType="com.atguigu.crowd.entity.vo.OrderProjectVO">
+        SELECT DISTINCT project_name            projectName,
+                        content                 returnContent,
+                        `description_simple`    launchName,
+                        t_return.`supportmoney` supportPrice,
+                        `freight`               freight,
+                        `count`                 returnCount,
+                        `signalpurchase`        signalPurchase,
+                        `purchase`              purchase
+        FROM t_project
+                 LEFT JOIN t_member_launch_info ON t_project.memberid = t_member_launch_info.memberid
+                 LEFT JOIN t_return ON t_project.id = t_return.projectid
+        WHERE t_return.id = #{returnId}
+    </select>
+
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="OrderProjectMap">
+        select id,
+               project_name,
+               launch_name,
+               return_content,
+               return_count,
+               support_price,
+               freight,
+               order_id
+        from project_crowd.t_order_project
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="OrderProjectMap">
+        select id,
+               project_name,
+               launch_name,
+               return_content,
+               return_count,
+               support_price,
+               freight,
+               order_id
+        from project_crowd.t_order_project limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="OrderProjectMap">
+        select
+        id, project_name, launch_name, return_content, return_count, support_price, freight, order_id
+        from project_crowd.t_order_project
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+            <if test="launchName != null and launchName != ''">
+                and launch_name = #{launchName}
+            </if>
+            <if test="returnContent != null and returnContent != ''">
+                and return_content = #{returnContent}
+            </if>
+            <if test="returnCount != null">
+                and return_count = #{returnCount}
+            </if>
+            <if test="supportPrice != null">
+                and support_price = #{supportPrice}
+            </if>
+            <if test="freight != null">
+                and freight = #{freight}
+            </if>
+            <if test="orderId != null">
+                and order_id = #{orderId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into project_crowd.t_order_project(project_name, launch_name, return_content, return_count,
+                                                  support_price, freight, order_id)
+        values (#{projectName}, #{launchName}, #{returnContent}, #{returnCount}, #{supportPrice}, #{freight},
+                #{orderId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into project_crowd.t_order_project(project_name, launch_name, return_content, return_count,
+        support_price, freight, order_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.projectName}, #{entity.launchName}, #{entity.returnContent}, #{entity.returnCount},
+            #{entity.supportPrice}, #{entity.freight}, #{entity.orderId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into project_crowd.t_order_project(project_name, launch_name, return_content, return_count,
+        support_price, freight, order_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.projectName}, #{entity.launchName}, #{entity.returnContent}, #{entity.returnCount},
+            #{entity.supportPrice}, #{entity.freight}, #{entity.orderId})
+        </foreach>
+        on duplicate key update
+        project_name = values(project_name) , launch_name = values(launch_name) , return_content =
+        values(return_content) , return_count = values(return_count) , support_price = values(support_price) , freight =
+        values(freight) , order_id = values(order_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update project_crowd.t_order_project
+        <set>
+            <if test="projectName != null and projectName != ''">
+                project_name = #{projectName},
+            </if>
+            <if test="launchName != null and launchName != ''">
+                launch_name = #{launchName},
+            </if>
+            <if test="returnContent != null and returnContent != ''">
+                return_content = #{returnContent},
+            </if>
+            <if test="returnCount != null">
+                return_count = #{returnCount},
+            </if>
+            <if test="supportPrice != null">
+                support_price = #{supportPrice},
+            </if>
+            <if test="freight != null">
+                freight = #{freight},
+            </if>
+            <if test="orderId != null">
+                order_id = #{orderId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from project_crowd.t_order_project
+        where id = #{id}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,16 @@
+server:
+  port: 3000
+spring:
+  application:
+    name: atguigu-crowd-redis
+  redis:
+    host: 182.42.116.132
+    port: 6379
+    password: cjs94dsg
+    jedis:
+      pool:
+        max-idle: 100
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka

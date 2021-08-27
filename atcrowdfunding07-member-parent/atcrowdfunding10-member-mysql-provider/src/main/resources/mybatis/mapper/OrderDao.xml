@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.crowd.mapper.OrderDao">
+
+    <resultMap type="com.atguigu.crowd.entity.po.OrderPO" id="OrderMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="orderNum" column="order_num" jdbcType="VARCHAR"/>
+        <result property="payOrderNum" column="pay_order_num" jdbcType="VARCHAR"/>
+        <result property="orderAmount" column="order_amount" jdbcType="NUMERIC"/>
+        <result property="invoice" column="invoice" jdbcType="INTEGER"/>
+        <result property="invoiceTitle" column="invoice_title" jdbcType="VARCHAR"/>
+        <result property="orderRemark" column="order_remark" jdbcType="VARCHAR"/>
+        <result property="addressId" column="address_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="OrderMap">
+        select id,
+               order_num,
+               pay_order_num,
+               order_amount,
+               invoice,
+               invoice_title,
+               order_remark,
+               address_id
+        from project_crowd.t_order
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="OrderMap">
+        select id,
+               order_num,
+               pay_order_num,
+               order_amount,
+               invoice,
+               invoice_title,
+               order_remark,
+               address_id
+        from project_crowd.t_order limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="OrderMap">
+        select
+        id, order_num, pay_order_num, order_amount, invoice, invoice_title, order_remark, address_id
+        from project_crowd.t_order
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="orderNum != null and orderNum != ''">
+                and order_num = #{orderNum}
+            </if>
+            <if test="payOrderNum != null and payOrderNum != ''">
+                and pay_order_num = #{payOrderNum}
+            </if>
+            <if test="orderAmount != null">
+                and order_amount = #{orderAmount}
+            </if>
+            <if test="invoice != null">
+                and invoice = #{invoice}
+            </if>
+            <if test="invoiceTitle != null and invoiceTitle != ''">
+                and invoice_title = #{invoiceTitle}
+            </if>
+            <if test="orderRemark != null and orderRemark != ''">
+                and order_remark = #{orderRemark}
+            </if>
+            <if test="addressId != null and addressId != ''">
+                and address_id = #{addressId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into project_crowd.t_order(order_num, pay_order_num, order_amount, invoice, invoice_title, order_remark,
+                                          address_id)
+        values (#{orderNum}, #{payOrderNum}, #{orderAmount}, #{invoice}, #{invoiceTitle}, #{orderRemark}, #{addressId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into project_crowd.t_order(order_num, pay_order_num, order_amount, invoice, invoice_title, order_remark,
+        address_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.orderNum}, #{entity.payOrderNum}, #{entity.orderAmount}, #{entity.invoice},
+            #{entity.invoiceTitle}, #{entity.orderRemark}, #{entity.addressId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into project_crowd.t_order(order_num, pay_order_num, order_amount, invoice, invoice_title, order_remark,
+        address_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.orderNum}, #{entity.payOrderNum}, #{entity.orderAmount}, #{entity.invoice},
+            #{entity.invoiceTitle}, #{entity.orderRemark}, #{entity.addressId})
+        </foreach>
+        on duplicate key update
+        order_num = values(order_num) , pay_order_num = values(pay_order_num) , order_amount = values(order_amount) ,
+        invoice = values(invoice) , invoice_title = values(invoice_title) , order_remark = values(order_remark) ,
+        address_id = values(address_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update project_crowd.t_order
+        <set>
+            <if test="orderNum != null and orderNum != ''">
+                order_num = #{orderNum},
+            </if>
+            <if test="payOrderNum != null and payOrderNum != ''">
+                pay_order_num = #{payOrderNum},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount},
+            </if>
+            <if test="invoice != null">
+                invoice = #{invoice},
+            </if>
+            <if test="invoiceTitle != null and invoiceTitle != ''">
+                invoice_title = #{invoiceTitle},
+            </if>
+            <if test="orderRemark != null and orderRemark != ''">
+                order_remark = #{orderRemark},
+            </if>
+            <if test="addressId != null and addressId != ''">
+                address_id = #{addressId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from project_crowd.t_order
+        where id = #{id}
+    </delete>
+
+</mapper>
+

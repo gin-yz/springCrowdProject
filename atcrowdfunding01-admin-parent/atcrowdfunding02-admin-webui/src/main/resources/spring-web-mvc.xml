@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- 配置自动扫描的包：扫描handler -->
+    <context:component-scan base-package="com.atguigu.crowd.mvc"/>
+
+    <!-- 配置SpringMVC的注解驱动 -->
+    <mvc:annotation-driven/>
+
+    <!-- 配置视图解析器 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--	 配置基于XML的异常映射，如果没有配基于注解的异常映射，那么就是全局的 -->
+    <bean id="simpleMappingExceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!-- 配置异常类型和具体视图页面的对应关系 -->
+        <property name="exceptionMappings">
+            <props>
+                <!-- key属性指定异常全类名 -->
+                <!-- 标签体中写对应的视图（这个值要拼前后缀得到具体路径）,也就是WEB-INF/system-error.jsp文件 -->
+                <prop key="java.lang.Exception">system-error</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 配置view-controller，直接把请求地址和视图名称关联起来，不必写handler方法了 -->
+    <!--
+        @RequestMapping("/admin/to/login/page.html")
+        public String toLoginPage(){
+            return "admin-login";
+        }
+     -->
+    <!--巨坑！！！！！，使用这个请求的handler是ParameterizableViewController，无法响应自定义异常处理(需要HandlerMethod定义的方法才行)，也就是无法响应@ControllerAdvice的处理-->
+    <!-- 调了我好久:( -->
+    <mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"/>
+    <mvc:view-controller path="/admin/to/main/page.html" view-name="admin-main"/>
+    <mvc:view-controller path="/admin/to/add/page.html" view-name="admin-add"/>
+    <!--    <mvc:view-controller path="/role/to/page.html" view-name="role-page"/>-->
+
+    <!-- 注册拦截器 -->
+    <!-- 使用springSecurity之后，这个拦截器就不使用了 -->
+    <!--    <mvc:interceptors>-->
+    <!--        <mvc:interceptor>-->
+    <!--            &lt;!&ndash; mvc:mapping配置要拦截的资源 &ndash;&gt;-->
+    <!--            &lt;!&ndash; /*对应一层路径，比如：/aaa &ndash;&gt;-->
+    <!--            &lt;!&ndash; /**对应多层路径，比如：/aaa/bbb或/aaa/bbb/ccc或/aaa/bbb/ccc/ddd &ndash;&gt;-->
+    <!--            <mvc:mapping path="/**"/>-->
+
+    <!--            &lt;!&ndash; mvc:exclude-mapping配置不拦截的资源 &ndash;&gt;-->
+    <!--            <mvc:exclude-mapping path="/admin/to/login/page.html"/>-->
+    <!--            <mvc:exclude-mapping path="/admin/do/login.html"/>-->
+    <!--            <mvc:exclude-mapping path="/admin/do/logout.html"/>-->
+
+    <!--            &lt;!&ndash; 配置拦截器类 &ndash;&gt;-->
+    <!--            <bean class="com.atguigu.crowd.mvc.interceptor.LoginInterceptor"/>-->
+    <!--        </mvc:interceptor>-->
+    <!--    </mvc:interceptors>-->
+    <!-- 启用全局方法权限控制功能，并且设置prePostEnabled = true。保证@PreAuthority、@PostAuthority、@PreFilter、@PostFilter生效-->
+    <security:global-method-security pre-post-annotations="enabled"/>
+
+</beans>

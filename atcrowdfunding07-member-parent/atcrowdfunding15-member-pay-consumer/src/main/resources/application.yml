@@ -1,0 +1,30 @@
+server:
+  port: 7000
+spring:
+  application:
+    name: atguigu-crowd-pay
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  redis:
+    host: 182.42.116.132
+    port: 6379
+    password: cjs94dsg
+  session:
+    store-type: redis
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+
+ali:
+  pay:
+    alipay-public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiksYx/UdiZdoFgRcF8XhDK22Y2ZSGPqnllwUI35e7XJMiUzEqLY1r7Cb03vcsN3tzXTQ7LcNVc5mByWmwyCdJ0dp5ecnJLq4qZ3yuz6aurFq/s2ux237Aa+wb3V5wuGpffL11ZF/rHlmnJ4OcH4EDmsmQ/FyCt8sPtrplxEB6CefESlCiDXZD+eHtliUYS5IGOiHGbHQ8iyACdbs7m3cHRdNIU+MdKkNUoQIHu+fY7av/xbRlVdQgyyIYGwm2cvlgC/nLjqmDHdybyUfFxz9FamQf+6NlLfiZazWjwSjGycV09KXTe9GaSjO7P9VEhUshebP5Z8iokgyGQvnAnrbwQIDAQAB
+    app-id: 2021000118606287
+    charset: utf-8
+    gateway-url: https://openapi.alipaydev.com/gateway.do
+    merchant-private-key: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCRlJIH1l2cnpUv7RGGfvifSI3IR6fR/oDZQ1sozopk0Hh7RBvQy0gZ1YtSmbAt3vuBal7ed5DG1DLKq/A55ZQ82aRq6D0iOX+M+WaI6XdTydo8Aol6adOHQuWPTRcYZ6k10U1BPpCeO0UZ6Oz53Q8yIPAWNonycozAHRciirs/47dJkVRtKyNT/N8zPMP0tZhFInq6xT1YzFC7Pj9mUXcenUIhaBZ1JuiOv+oCZs/6silCeGaGeGfPUD/W6BJUIkO2V7HBo9bBx7osxdt1HT98Hgljo/iB94H4jObMzkhjwJE4eMJwrNxpWuZczCLrKAC33yvZWaEc0RMH/mhpvMLtAgMBAAECggEAE7m9z7IMHRyfuk61ATRTG8II9ApBgwKpEsc9otnZhq94o7smybPBoT5+EkMgzBZanb57/EjXJRm7iBqkAjRJUbVrwdCV9/0yezeP3R1FPeUr3NW7KwsLzlgSIsifSH9DPjeN8Dk5/zaotkoJUhHR7UjpPxlEt8UtrRpD+Do0BQPxkOY7BdJW7/KzYYZlSmxsh1+CX9RUcYUW7uUNUG2FxdUL8uWt03UHno4hMDgtkWlb/uqVTJMT8lUJDHIF05VmOZHmF028HGUJV3fBhznwUT7ufMa407BUVXh4A9ZKIQI8r76dYKuJ1ScOWQmwsKxon1PYwfoO699ND0XYEGgdQQKBgQDBjpRnd6eTcJlMk/TlaoY+UFP0Y6rbGZXeoXGD7YHSDJ9xibpPscYUk3D+dHDO1iBnI5xC58+3jPQOTJRFpgWHblYt2PBl7q2b53NC8wsW/yWzMyalC/Tt34BwvZoAMRBPWuZBOnPLVgaJuoL4MZfI7qWci9nksyBrj8+3MKZ4xwKBgQDAi7budOXndkDh1lmpeJuMH9F4+5R+rS3mOUf/lKK5ROEqTzbACsqZTFMUMXBNb44kl4VM7UsJloMSl9iTyIqxs7T0pxdvnC3Jf98FZSRkITNixGd8No2l63naQnP+paW29//oF/vgn4b/6u7wxLeeTxenlOnM2Oe/fwSBiGs6qwKBgEHug3bLN3XtwQpoy97p7liDnFV/Lc/8YyS28afy22nlitpuA9zpvYN8xdynZVXPcrIvWycfN45aoTfNtiQTbYa4evqbDyhpqRGWQZjomTp4JytnnR5TeFce7u14aGDwVZHycMR/WLpGz2tS8RICMqXrRNaSfOJ+ceix0BuiotI5AoGAXIdHo5Qdn3uedmjRsbU52r63pVIQ7EdA1XAVf2boQ+wr4G8sumD1N3IMQpn3g97mCgOelXc7JiJkXp0GAQ7QR9E6Vo+tnX8KKdj/TdJrCItD7GTB7lkw/NkKN67Tmz3zQtgu7FQKQMmo0HcP2DhQnQ0ZKvlO2Zgq1kWt3qm2Df0CgYAUF6h6MV57UX9oyWZZeEcSiBzSMKOeUKkHsBzvVYvdDrHwedTbZqQzY7BdS7v7kFpNZ6rYpVsKdCKYb+4on/RkeRfPNLuiP9nAqGA2mrrFosSemdJM9eQEtepiGi4mOoYrR9ZE/b/opzHDvYmNHl9WyGajrpWtiqH7l9iFpHe/MQ==
+    notify-url: http://47.115.203.254/pay/notify #注意，这个域名是通过ngrok端口转发实现,由于使用了zuul做了登陆校验，必须登陆之后才能访问，所以这里调用会报错
+    return-url: http://47.115.203.254/pay/return
+    sign-type: RSA2

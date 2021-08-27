@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="pro11-spring-cloud-dashboard" />
+        <module name="pro09-spring-cloud-feign-consumer" />
+        <module name="pro12-spring-cloud-zuul" />
+        <module name="pro08-spring-cloud-provider" />
+        <module name="pro07-spring-cloud-common" />
+        <module name="pro10-spring-cloud-eureka" />
+        <module name="pro09-spring-cloud-consumer" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pro06-spring-cloud-parent" target="1.8" />
+      <module name="pro07-spring-cloud-common" target="1.8" />
+      <module name="pro08-spring-cloud-provider" target="1.8" />
+      <module name="pro09-spring-cloud-consumer" target="1.8" />
+      <module name="pro09-spring-cloud-feign-consumer" target="1.8" />
+      <module name="pro10-spring-cloud-eureka" target="1.8" />
+      <module name="pro11-spring-cloud-dashboard" target="1.8" />
+      <module name="pro12-spring-cloud-zuul" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,33 @@
+server:
+    port: 5000
+spring:
+  application:
+    name: atguigu-crowd-project
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  redis:
+    host: 182.42.116.132
+    port: 6379
+    password: cjs94dsg
+  session:
+    store-type: redis
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+aliyun:
+  oss:
+    access-key-id: LTAI4FtyK7WcqxaiE9ttukNi
+    access-key-secret: 43OFOgMghjsitNsNlTGqcpPGgyzqgU
+    bucket-domain: http://atguigu190830.oss-cn-shenzhen.aliyuncs.com
+    bucket-name: atguigu190830
+    end-point: http://oss-cn-shenzhen.aliyuncs.com
+
+#自定义上传路径
+file:
+  upload:
+    orginalPath: static
+    innerPath: /images
+    url: http://www.chenjinsheng.top/project/
